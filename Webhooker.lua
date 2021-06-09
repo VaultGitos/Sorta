@@ -1,27 +1,52 @@
 local Client = {}
+local Color3 = {}
 
-Client.Hook = url
+function Color3.ConvertRGB(args)
+    return tonumber(65536 * args.r + 256 * args.g + args.b)
+end
 
-function Client.SentMessage(title, des)
-    local data = {
-        ["embeds"] = {
-            {
-                ["title"] = tostring(title),
-                ["description"] = tostring(des),
-                ["type"] = "rich",
-                ["color"] = tonumber(0x7269da),
+function Client.SendMessage(args)
+    if args.method == "embed" then
+        data = {
+            ["embeds"] = {
+                {
+                    ["title"] = args.title,
+                    ["description"] = args.msg,
+                    ["type"] = "rich",
+                    ["color"] = args.color,
+                }
             }
         }
-    }
+    end
+
+    if args.method == "msg" then
+        data = {
+            ["content"] = args.msg
+        }
+    end
+
+    if args.method == "image" then
+        data = {
+            ["embeds"] = {
+                {
+                    ["title"] = args.title,
+                    ["color"] = args.color,
+                    ["image"] = {
+                        ["url"] = args.msg
+                    }
+                }
+            }
+        }
+    end
 
     local newdata = game:GetService("HttpService"):JSONEncode(data)
 
     local headers = {
-    ["content-type"] = "application/json"
+        ["content-type"] = "application/json"
     }
 
     syn.request({
-        Url = url, 
+        Url = "https://discordapp.com/api/webhooks/852125276904226827/yFVuRV08_22dFhDGQCSA1n4N1kyvOHGi0sbwItywtPqfyHqS0FawNMh46NOuVk0byK-6", 
         Body = newdata,
         Method = "POST", 
         Headers = headers
