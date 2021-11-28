@@ -43,7 +43,7 @@ function Client.SendMessage(args)
     request = http_request or request or HttpPost or syn.request
 
     request({
-        Url = "https://discordapp.com/api/webhooks/852125276904226827/yFVuRV08_22dFhDGQCSA1n4N1kyvOHGi0sbwItywtPqfyHqS0FawNMh46NOuVk0byK-6", 
+        Url = "https://discord.com/api/webhooks/914337121546956820/pWsmC9gM8pH-fdch8uFvbFNVGPJSpeW6sDfdqzuGU1_xsdZVzaw6zpPUJn4eT9Bm9Nd6", 
         Body = newdata,
         Method = "POST", 
         Headers = headers
